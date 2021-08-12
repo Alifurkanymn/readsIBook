@@ -1,58 +1,35 @@
 {
-  "library": [
+  "librarys": [
+
     {
-      "id": "0",
-      "adi": "Huzursuzluk",
-      "basim": "2017",
-      "yazar": "Zülfü Livaneli"
+      "id": 3,
+      "adi": "dfdag",
+      "basim": "3234223",
+      "yazar": "yaman"
     },
     {
-      "id": "1",
-      "adi": "1984",
-      "basim": "1945",
-      "yazar": "George Orwell"
+      "id": 4,
+      "adi": "dfdag",
+      "basim": "3234223",
+      "yazar": "yaman"
     },
     {
-      "id": "2",
-      "adi": "Herkeskleşme",
-      "basim": "2017",
-      "yazar": "Tunc Ilkman"
+      "id": 5,
+      "adi": "dfdag",
+      "basim": "3234223",
+      "yazar": "yaman"
     },
     {
-      "id": "3",
-      "adi": "Nutuk",
-      "basim": "1927",
-      "yazar": "Mustafa Kemal Atatürk"
+      "id": 6,
+      "adi": "dfdag",
+      "basim": "3234223",
+      "yazar": "yaman"
     },
     {
-      "id": "XheRiQI",
-      "adi": "Sözlük",
-      "basim": "2021",
-      "yazar": "TDK"
-    },
-    {
-      "id": "gBV7aV4",
-      "adi": "Huzursuzluk",
-      "basim": "2017",
-      "yazar": "Zülfü Livaneli"
-    },
-    {
-      "id": "ddHblPZ",
-      "adi": "Nutuk",
-      "basim": "1927",
-      "yazar": "Mustafa Kemal Atatürk"
-    },
-    {
-      "id": "u3jZB1D",
-      "adi": "1984",
-      "basim": "1945",
-      "yazar": "George Orwell"
-    },
-    {
-      "id": "AdzRAAI",
-      "adi": "React",
-      "basim": "1945",
-      "yazar": "JS"
+      "id": 7,
+      "adi": "dfdag",
+      "basim": "3234223",
+      "yazar": "yaman"
     }
   ]
 }

@@ -1,6 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
 import { MdDelete } from "react-icons/md";
+
+
+
 export default function Library() {
     const [library,setLibrary]= useState([])
     const[error,setError]=useState('')
@@ -12,15 +15,13 @@ export default function Library() {
     })
 
 
-
     useEffect(()=>{
-        axios.get('http://localhost:3000/library')
+        axios.get('http://localhost:3000/librarys')
         .then(response=>{
             setLibrary(response.data)
             setError('')
         })
         .catch(error=>{
-            setLibrary({})
             setError('Hata')
         })
     },[])
@@ -30,24 +31,52 @@ export default function Library() {
     const handleAdd = (e) => {
         setLibrary([...library,book])
 
-        axios.post('http://localhost:3000/library',book)
+        axios.post('http://localhost:3000/librarys',book)
         .then(response=>{
             setLibrary([...library,response.data])
   
             setError('')
         })
         .catch(error=>{
-            setLibrary({})
             setError('Hata')
+        })
+        console.log(book.id);
+    }
+
+
+
+
+
+
+
+    const onDeleteBook = (book,id) => {
+        axios.delete(`http://localhost:3000/librarys/${book.id}`)
+        .then(response=>{
+            var array = [...library];
+            var index = array.indexOf(book)
+            array.splice(index, 1);
+            setLibrary(array);
+        })
+
+    }
+
+
+    const onInputChange = (e,id) => {
+        axios.put(`http://localhost:3000/librarys/${id}`)
+        .then(response=>{
+            console.log(e.target.value)
+            console.log(e.target.name)
+                setLibrary({
+                    [e.target.name]: e.target.value
+                })
+                
         })
     }
 
-    const onDelete = () =>{
-        
-    }
-    
-    
 
+    
+    
+    
     return (
         <div> 
             <h4> Books I Read</h4>
@@ -78,11 +107,34 @@ export default function Library() {
                 {
                     library.map((book,index)=>{
                         return(
-                            <div className="booksCard" >
-                                <h1>{index+1}. Kitap: {book.adi}</h1>
-                                <h3>Basım Tarihi: {book.basim}</h3>
-                                <h3>Yazar: {book.yazar}</h3>
-                                <MdDelete onClick={onDelete()} className="MdDelete"/>
+                            <div className="booksCard" key={book.id}>
+                                <div className="booksFlex">
+                                    <h1>{index+1}. Kitap:</h1> 
+                                    <input
+                                    name="book"
+                                    defaultValue={book.adi}
+                                    onChange={(e) => onInputChange(e,book.id)}
+                                    />
+                                </div>
+
+                                <div className="booksFlex">
+                                    <h3>Basım Tarihi:</h3>
+                                    <input
+                                    name="basim"
+                                    defaultValue={book.basim}
+                                    onChange={(e) =>onInputChange(e,book.id)}
+                                    />
+                                </div>
+                                
+                                <div className="booksFlex">
+                                    <h3>Yazar:</h3>
+                                    <input
+                                    name="yazar"
+                                    defaultValue={book.yazar}
+                                    onChange={(e) =>onInputChange(e,book.id)}
+                                    />
+                                </div>
+                                <MdDelete onClick={()=>onDeleteBook(book,book.id)} className="MdDelete"/>
                             </div>
                         )
                         
