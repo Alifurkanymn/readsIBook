@@ -12,7 +12,12 @@ export default function Library() {
         adi:"", 
         basim:"", 
         yazar:""
-    })
+    });
+    const[updatedBook,setUpdatedBook]= useState({
+        adi:"",
+        basim:"", 
+        yazar:""
+    });
 
 
     useEffect(()=>{
@@ -61,19 +66,11 @@ export default function Library() {
     }
 
 
-    const onInputChange = (e,index) => {
-        console.log(index)
-        var array = [...library];
-        array[index][e.target.name]=e.target.value
-        setLibrary(array);
-            
-    }
-
 
     const onSave = (id) => {
-        axios.put(`http://localhost:3000/librarys/${id}`, book)
-        .then(response=>{
-            console.log("successful")
+        axios.put(`http://localhost:3000/librarys/${id}`, updatedBook)
+        .then((response)=>{
+            window.location.reload();
         })
 
 
@@ -89,19 +86,19 @@ export default function Library() {
                 placeholder="Kitap Adı" 
                 name="kitapadi"
                 value={book.adi}
-                onChange={(e)=>{setBook({...book,adi:e.target.value})}}/>
+                onChange={(e)=>{setBook({...updatedBook,adi:e.target.value})}}/>
 
                 <input type="text" 
                 placeholder="Basım Tarihi" 
                 name="basim"
                 value={book.basim}
-                onChange={(e)=>{setBook({...book,basim:e.target.value})}}/>
+                onChange={(e)=>{setBook({...updatedBook,basim:e.target.value})}}/>
 
                 <input type="text" 
                 placeholder="Yazar" 
                 name="yazar"
                 value={book.yazar}
-                onChange={(e)=>{setBook({...book,yazar:e.target.value})}}/>
+                onChange={(e)=>{setBook({...updatedBook,yazar:e.target.value})}}/>
                 <i class="fas fa-trash-alt"></i>
 
                 <button onClick={handleAdd}>Ekle</button>
@@ -113,11 +110,11 @@ export default function Library() {
                         return(
                             <div className="booksCard" key={book.id}>
                                 <div className="booksFlex">
-                                    <h1>{index+1}. Kitap:</h1> 
+                                    <h1>Kitap Adı:</h1> 
                                     <input
                                     name="book"
                                     defaultValue={book.adi}
-                                    onChange={(e) => onInputChange(e,book.id,index)}
+                                    onChange={(e) => setUpdatedBook(e,book.id,index)}
                                     />
                                 </div>
 
@@ -126,7 +123,7 @@ export default function Library() {
                                     <input
                                     name="basim"
                                     defaultValue={book.basim}
-                                    onChange={(e) =>onInputChange(e,book.id,index)}
+                                    onChange={(e) =>setUpdatedBook(e,book.id,index)}
                                     />
                                 </div>
                                 
@@ -135,7 +132,7 @@ export default function Library() {
                                     <input
                                     name="yazar"
                                     defaultValue={book.yazar}
-                                    onChange={(e) =>onInputChange(e,book.id,index)}
+                                    onChange={(e) =>setUpdatedBook(e,book.id,index)}
                                     />
                                 </div>
                                 <button onClick={()=> onSave(book.id)}>Save</button>
