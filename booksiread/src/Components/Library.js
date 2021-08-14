@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 
 export default function Library() {
     const [library,setLibrary]= useState([])
-    const[error,setError]=useState('')
+    const[,setError]=useState('')
     const[book,setBook] = useState({
         id:"",
         adi:"", 
@@ -61,19 +61,23 @@ export default function Library() {
     }
 
 
-    const onInputChange = (e,id) => {
-        axios.put(`http://localhost:3000/librarys/${id}`)
-        .then(response=>{
-            console.log(e.target.value)
-            console.log(e.target.name)
-                setLibrary({
-                    [e.target.name]: e.target.value
-                })
-                
-        })
+    const onInputChange = (e,index) => {
+        console.log(index)
+        var array = [...library];
+        array[index][e.target.name]=e.target.value
+        setLibrary(array);
+            
     }
 
 
+    const onSave = (id) => {
+        axios.put(`http://localhost:3000/librarys/${id}`, book)
+        .then(response=>{
+            console.log("successful")
+        })
+
+
+    }
     
     
     
@@ -113,7 +117,7 @@ export default function Library() {
                                     <input
                                     name="book"
                                     defaultValue={book.adi}
-                                    onChange={(e) => onInputChange(e,book.id)}
+                                    onChange={(e) => onInputChange(e,book.id,index)}
                                     />
                                 </div>
 
@@ -122,7 +126,7 @@ export default function Library() {
                                     <input
                                     name="basim"
                                     defaultValue={book.basim}
-                                    onChange={(e) =>onInputChange(e,book.id)}
+                                    onChange={(e) =>onInputChange(e,book.id,index)}
                                     />
                                 </div>
                                 
@@ -131,9 +135,10 @@ export default function Library() {
                                     <input
                                     name="yazar"
                                     defaultValue={book.yazar}
-                                    onChange={(e) =>onInputChange(e,book.id)}
+                                    onChange={(e) =>onInputChange(e,book.id,index)}
                                     />
                                 </div>
+                                <button onClick={()=> onSave(book.id)}>Save</button>
                                 <MdDelete onClick={()=>onDeleteBook(book,book.id)} className="MdDelete"/>
                             </div>
                         )

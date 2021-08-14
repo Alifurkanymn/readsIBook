@@ -1,35 +1,28 @@
 {
   "librarys": [
-
+    {
+      "id": 1,
+      "adi": "kitap1",
+      "basim": "kitap1",
+      "yazar": "kitap1"
+    },
+    {
+      "id": 2,
+      "adi": "kitap1",
+      "basim": "kitap1",
+      "yazar": "kitap1"
+    },
     {
       "id": 3,
-      "adi": "dfdag",
-      "basim": "3234223",
-      "yazar": "yaman"
+      "adi": "kitap2",
+      "basim": "kitap2",
+      "yazar": "kitap2"
     },
     {
       "id": 4,
-      "adi": "dfdag",
-      "basim": "3234223",
-      "yazar": "yaman"
-    },
-    {
-      "id": 5,
-      "adi": "dfdag",
-      "basim": "3234223",
-      "yazar": "yaman"
-    },
-    {
-      "id": 6,
-      "adi": "dfdag",
-      "basim": "3234223",
-      "yazar": "yaman"
-    },
-    {
-      "id": 7,
-      "adi": "dfdag",
-      "basim": "3234223",
-      "yazar": "yaman"
+      "adi": "kitap3",
+      "basim": "kitap3",
+      "yazar": "kitap3"
     }
   ]
 }
