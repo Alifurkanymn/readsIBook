@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Alifurkanymn/readsIBook/issues"
   },
-  "homepage": "https://github.com/Alifurkanymn/readsIBook#readme"
+  "homepage": "https://github.com/Alifurkanymn/readsIBook#readme",
+  "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
+    "react-icons": "^4.2.0"
+  }
 }

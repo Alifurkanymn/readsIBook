@@ -1,6 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
-import { MdDelete } from "react-icons/md";
+import { MdDelete} from "react-icons/md";
+import { FaSave} from "react-icons/fa";
+import { AiTwotoneEdit} from "react-icons/ai";
 
 
 
@@ -11,7 +13,8 @@ export default function Library() {
         id:"",
         adi:"", 
         basim:"", 
-        yazar:""
+        yazar:"",
+        isVisible:false
     });
     const[updatedBook,setUpdatedBook]= useState({
         adi:"",
@@ -42,7 +45,7 @@ export default function Library() {
   
             setError('')
         })
-        .catch(error=>{
+        .catch(setError=>{
             setError('Hata')
         })
         console.log(book.id);
@@ -62,7 +65,9 @@ export default function Library() {
             array.splice(index, 1);
             setLibrary(array);
         })
-
+        .catch(setError=>{
+            setError('Hata')
+        })
     }
 
 
@@ -70,13 +75,20 @@ export default function Library() {
     const onSave = (id) => {
         axios.put(`http://localhost:3000/librarys/${id}`, updatedBook)
         .then((response)=>{
-            window.location.reload();
         })
+        .catch(setError=>{
+            setError('Hata')
+        })
+    }
 
-
+    var change = () => {
+        setBook({
+            isVisible: !book.isVisible
+        })
     }
     
     
+    const {isVisible} = book.isVisible;
     
     return (
         <div> 
@@ -109,34 +121,43 @@ export default function Library() {
                     library.map((book,index)=>{
                         return(
                             <div className="booksCard" key={book.id}>
-                                <div className="booksFlex">
-                                    <h1>Kitap Adı:</h1> 
-                                    <input
-                                    name="book"
-                                    defaultValue={book.adi}
-                                    onChange={(e) => setUpdatedBook(e,book.id,index)}
-                                    />
-                                </div>
+                                    <div className="contentFlex">
+                                        <div className="booksFlex">
+                                            <h1>Kitap Adı:</h1> 
+                                            <input
+                                            name="book"
+                                            defaultValue={book.adi}
+                                            onChange={(e) => setUpdatedBook({...updatedBook, ...book,adi: e.target.value})}
+                                            />
+                                        </div>
 
-                                <div className="booksFlex">
-                                    <h3>Basım Tarihi:</h3>
-                                    <input
-                                    name="basim"
-                                    defaultValue={book.basim}
-                                    onChange={(e) =>setUpdatedBook(e,book.id,index)}
-                                    />
-                                </div>
-                                
-                                <div className="booksFlex">
-                                    <h3>Yazar:</h3>
-                                    <input
-                                    name="yazar"
-                                    defaultValue={book.yazar}
-                                    onChange={(e) =>setUpdatedBook(e,book.id,index)}
-                                    />
-                                </div>
-                                <button onClick={()=> onSave(book.id)}>Save</button>
-                                <MdDelete onClick={()=>onDeleteBook(book,book.id)} className="MdDelete"/>
+                                        <div className="booksFlex">
+                                            <h3>Basım Tarihi:</h3>
+                                            <input
+                                            name="basim"
+                                            defaultValue={book.basim}
+                                            onChange={(e) =>setUpdatedBook({...updatedBook, ...book,basim: e.target.value})}
+                                            />
+                                        </div>
+                                        
+                                        <div className="booksFlex">
+                                            <h3>Yazar:</h3>
+                                            <input
+                                            name="yazar"
+                                            defaultValue={book.yazar}
+                                            onChange={(e) =>setUpdatedBook({...updatedBook, ...book, yazar: e.target.value})}
+                                            />
+                                        </div>
+                                        <div className="buttonFlex">
+                                            {
+                                            isVisible ? 
+                                            <AiTwotoneEdit onClick={()=>change()}className="AiTwotoneEdit"/>
+                                            : <FaSave onClick={()=> onSave(book.id), ()=>change()} className="FaSave"/>
+                                            }
+                                            <MdDelete onClick={()=>onDeleteBook(book,book.id)} className="MdDelete"/>
+                                            
+                                        </div>
+                                    </div>
                             </div>
                         )
                         

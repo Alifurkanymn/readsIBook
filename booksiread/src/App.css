@@ -56,7 +56,7 @@ button:hover{
     text-align: center;
     border: 1px solid rgb(211, 211, 211);
     margin:100px 0 0 50px;
-    width: 300px;
+    width: 418px;
     border-radius:10px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -75,7 +75,7 @@ button:hover{
     margin-top: 24px;
     font-size: 18px;
     font-weight:600;
-    height:22px;
+    height:20px;
     width: 150px;
 }
 
@@ -89,11 +89,33 @@ button:hover{
 }
 
 .MdDelete{
+    width:40px;
+    height:30px;
+    color: red;
+    cursor: pointer;
+    margin-top: -3px;
+}
+.FaSave{
     width:25px;
     height:25px;
     color: red;
     cursor: pointer;
+}
+.AiTwotoneEdit{
+    width:25px;
+    height:25px;
+    color: red;
+    cursor: pointer;
+}
 
+.buttonFlex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.buttonFlex{
+    display: flex;
+    flex-direction: row;
 }
 
 
