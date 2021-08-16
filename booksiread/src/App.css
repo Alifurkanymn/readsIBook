@@ -1,3 +1,6 @@
+body{
+    margin-bottom: 70px;
+}
 .books{
     display: flex;
     flex-wrap: wrap;
@@ -76,7 +79,8 @@ button:hover{
     font-size: 18px;
     font-weight:600;
     height:20px;
-    width: 150px;
+    width: 275px;
+    background-color:white;
 }
 
 .booksCard:hover{
@@ -121,7 +125,7 @@ button:hover{
 
 h1{ 
     color: red;
-    font-size: 25px;
+    font-size: 24px;
 }
 h4{
     font-size: 45px;
@@ -130,5 +134,8 @@ h4{
     -webkit-text-fill-color: transparent;
     text-align: center;
     
+}
+h3{
+    font-size:20px;
 }
 

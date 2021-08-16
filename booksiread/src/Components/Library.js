@@ -14,13 +14,16 @@ export default function Library() {
         adi:"", 
         basim:"", 
         yazar:"",
-        isVisible:false
     });
     const[updatedBook,setUpdatedBook]= useState({
         adi:"",
         basim:"", 
         yazar:""
     });
+    const[visible,setVisible]= useState({
+        isVisible : true,
+        disabled: true,
+    })
 
 
     useEffect(()=>{
@@ -75,6 +78,9 @@ export default function Library() {
     const onSave = (id) => {
         axios.put(`http://localhost:3000/librarys/${id}`, updatedBook)
         .then((response)=>{
+            setVisible({
+                isVisible: !visible.isVisible
+            })
         })
         .catch(setError=>{
             setError('Hata')
@@ -82,13 +88,13 @@ export default function Library() {
     }
 
     var change = () => {
-        setBook({
-            isVisible: !book.isVisible
+        setVisible({
+            isVisible: !visible.isVisible
         })
     }
     
     
-    const {isVisible} = book.isVisible;
+    const isVisible = visible.isVisible;
     
     return (
         <div> 
@@ -98,19 +104,19 @@ export default function Library() {
                 placeholder="Kitap Adı" 
                 name="kitapadi"
                 value={book.adi}
-                onChange={(e)=>{setBook({...updatedBook,adi:e.target.value})}}/>
+                onChange={(e)=>{setBook({...book,adi:e.target.value})}}/>
 
                 <input type="text" 
                 placeholder="Basım Tarihi" 
                 name="basim"
                 value={book.basim}
-                onChange={(e)=>{setBook({...updatedBook,basim:e.target.value})}}/>
+                onChange={(e)=>{setBook({...book,basim:e.target.value})}}/>
 
                 <input type="text" 
                 placeholder="Yazar" 
                 name="yazar"
                 value={book.yazar}
-                onChange={(e)=>{setBook({...updatedBook,yazar:e.target.value})}}/>
+                onChange={(e)=>{setBook({...book,yazar:e.target.value})}}/>
                 <i class="fas fa-trash-alt"></i>
 
                 <button onClick={handleAdd}>Ekle</button>
@@ -127,6 +133,7 @@ export default function Library() {
                                             <input
                                             name="book"
                                             defaultValue={book.adi}
+                                            disabled = {(visible.disabled)? "disabled" : ""}
                                             onChange={(e) => setUpdatedBook({...updatedBook, ...book,adi: e.target.value})}
                                             />
                                         </div>
@@ -136,6 +143,7 @@ export default function Library() {
                                             <input
                                             name="basim"
                                             defaultValue={book.basim}
+                                            disabled = {(visible.disabled)? "disabled" : ""}
                                             onChange={(e) =>setUpdatedBook({...updatedBook, ...book,basim: e.target.value})}
                                             />
                                         </div>
@@ -145,6 +153,7 @@ export default function Library() {
                                             <input
                                             name="yazar"
                                             defaultValue={book.yazar}
+                                            disabled = {(visible.disabled)? "disabled" : ""}
                                             onChange={(e) =>setUpdatedBook({...updatedBook, ...book, yazar: e.target.value})}
                                             />
                                         </div>
@@ -152,7 +161,7 @@ export default function Library() {
                                             {
                                             isVisible ? 
                                             <AiTwotoneEdit onClick={()=>change()}className="AiTwotoneEdit"/>
-                                            : <FaSave onClick={()=> onSave(book.id), ()=>change()} className="FaSave"/>
+                                            : <FaSave onClick={()=> onSave(book.id)} className="FaSave"/>
                                             }
                                             <MdDelete onClick={()=>onDeleteBook(book,book.id)} className="MdDelete"/>
                                             
